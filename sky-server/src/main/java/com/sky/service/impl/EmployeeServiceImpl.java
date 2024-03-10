@@ -99,9 +99,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      *
      * @param employeePageQueryDTO
      */
-    public PageResult listEmployees(EmployeePageQueryDTO employeePageQueryDTO) {
+    public PageResult employeePageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
-        Page<Employee> page = employeeMapper.listEmployees(employeePageQueryDTO);
+        Page<Employee> page = employeeMapper.employeePageQuery(employeePageQueryDTO);
 
         long total = page.getTotal();
         List<Employee> records = page.getResult();
@@ -136,7 +136,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     * update employee
+     * Update employee
      *
      * @param employeeDTO
      */

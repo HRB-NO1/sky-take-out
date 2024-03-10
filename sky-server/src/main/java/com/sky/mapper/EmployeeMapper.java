@@ -29,7 +29,7 @@ public interface EmployeeMapper {
      *
      * @param employeePageQueryDTO
      */
-    Page<Employee> listEmployees(EmployeePageQueryDTO employeePageQueryDTO);
+    Page<Employee> employeePageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
      * update employee

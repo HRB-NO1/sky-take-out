@@ -99,9 +99,9 @@ public class EmployeeController {
      */
     @GetMapping("/page")
     @ApiOperation(value = "ListEmployees")
-    public Result<PageResult> listEmployees(EmployeePageQueryDTO employeePageQueryDTO) {
+    public Result<PageResult> employeePageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         log.info("List employees: {}", employeePageQueryDTO);
-        PageResult pageResult = employeeService.listEmployees(employeePageQueryDTO);
+        PageResult pageResult = employeeService.employeePageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
 

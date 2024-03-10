@@ -25,7 +25,7 @@ public interface EmployeeService {
      * List employee
      * @param employeePageQueryDTO
      */
-    PageResult listEmployees(EmployeePageQueryDTO employeePageQueryDTO);
+    PageResult employeePageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
      * Enable or disable employee
@@ -42,7 +42,7 @@ public interface EmployeeService {
     Employee getByID(Long id);
 
     /**
-     * update employee
+     * Update employee
      * @param employeeDTO
      */
     void updateEmployee(EmployeeDTO employeeDTO);
