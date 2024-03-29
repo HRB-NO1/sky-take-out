@@ -1,4 +1,4 @@
-package com.sky.Aspect;
+package com.sky.aspect;
 
 import com.sky.annotation.AutoFill;
 import com.sky.constant.AutoFillConstant;
@@ -15,14 +15,14 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 
 /**
- * Auto fill the field with the current user and current time
+ * Autofill the field with the current user and current time
  */
 @Aspect
 @Component
 @Slf4j
 public class AutoFillAspect {
     /**
-     * Define the pointcut for the auto fill
+     * Define the pointcut for the autofill
      */
     @Pointcut("execution(* com.sky.mapper.*.*(..)) && @annotation(com.sky.annotation.AutoFill)")
     public void autoFillCutPoint() {}
