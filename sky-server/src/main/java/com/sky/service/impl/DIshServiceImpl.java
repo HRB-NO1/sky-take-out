@@ -106,4 +106,57 @@ public class DIshServiceImpl implements DishService {
         }
 
     }
+
+    /**
+     * Get the dish by id
+     * @param id
+     * @return
+     */
+    public DishVO getByIdWithFlavor(Long id) {
+        // get the dish data
+        Dish dish = dishMapper.getbyId(id);
+        // get the dish_flavor data
+        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
+        // encapsulate the data into DishVO
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(dishFlavors);
+
+        return dishVO;
+    }
+
+    /**
+     * Update the dish with flavor
+     * @param dishDTO
+     */
+    public void updateWithFlavor(DishDTO dishDTO) {
+        // update the dish
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
+        dishMapper.update(dish);
+
+        // delete the dish_flavor
+        dishFlavorMapper.deleteByDishId(dish.getId());
+
+        // add the dish_flavor
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        if (flavors != null && flavors.size() > 0) {
+            flavors.forEach(flavor -> {
+                flavor.setDishId(dish.getId());
+            });
+            dishFlavorMapper.insertBatch(flavors);
+        }
+    }
+
+    /**
+     * Start or stop the dish
+     * @param status
+     * @param id
+     */
+    public void startOrStop(Integer status, Long id) {
+        Dish dish = new Dish();
+        dish.setId(id);
+        dish.setStatus(status);
+        dishMapper.update(dish);
+    }
 }

@@ -6,6 +6,7 @@ import com.sky.dto.DishPageQueryDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
+import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -64,4 +65,45 @@ public class DishController {
         dishService.deleteBatch(ids);
         return Result.success();
     }
+
+    /**
+     * Query the dish by id
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("Query the dish by id")
+    public Result<DishVO> getbyId(@PathVariable Long id) {
+        log.info("Query the dish by id: {}", id);
+        DishVO dishVO = dishService.getByIdWithFlavor(id);
+        return Result.success(dishVO);
+    }
+
+    /**
+     * Update the dish
+     * @param dishDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("Update the dish")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        log.info("Update the dish: {}", dishDTO);
+        dishService.updateWithFlavor(dishDTO);
+        return Result.success();
+    }
+
+    /**
+     * Start or stop the dish
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("Start or stop the dish")
+    public Result startOrStop(@PathVariable("status") Integer status, Long id) {
+        log.info("Start or stop the dish: {}", id);
+        dishService.startOrStop(status, id);
+        return Result.success();
+    }
+
 }

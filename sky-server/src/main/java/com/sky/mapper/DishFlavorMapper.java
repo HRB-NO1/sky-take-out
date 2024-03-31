@@ -5,6 +5,7 @@ import com.sky.entity.DishFlavor;
 import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -24,4 +25,12 @@ public interface DishFlavorMapper {
      */
     @Delete("delete from dish_flavor where dish_id = #{dishId}")
     void deleteByDishId(Long dishId);
+
+    /**
+     * Get the dish_flavor by dish id
+     * @param DishId
+     * @return
+     */
+    @Select("select * from dish_flavor where dish_id = #{DishId}")
+    List<DishFlavor> getByDishId(Long DishId);
 }

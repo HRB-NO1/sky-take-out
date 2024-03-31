@@ -11,3 +11,8 @@ sky:
     access-key-id: LTAI5tADvqLKixtxA4pmUeGr
     access-key-secret: TVp2KG7ih7HDovUByg4N5CjmmKyoxy
     bucket-name: sky-take-out-image-storage
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 0
