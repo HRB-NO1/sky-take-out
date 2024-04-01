@@ -19,11 +19,11 @@ spring:
     database: ${sky.redis.database}
 
 mybatis:
-  #mapper配置文件
+  # Set the configuration file of mapper
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.sky.entity
   configuration:
-    #开启驼峰命名
+    # The configuration of the map key is to convert the database field name to the camel case of the entity class
     map-underscore-to-camel-case: true
 
 logging:
@@ -36,15 +36,24 @@ logging:
 
 sky:
   jwt:
-    # 设置jwt签名加密时使用的秘钥
+    # Set the secret key used to encrypt the jwt
     admin-secret-key: itcast
-    # 设置jwt过期时间
-    admin-ttl: 720000000 #7200000
-    # 设置前端传递过来的令牌名称
+    # Set the expiration time of the jwt
+    admin-ttl: 72000000000 #7200000
+    # Set the token name used to store the admin token
     admin-token-name: token
+    # Set the secret key used to encrypt the jwt
+    user-secret-key: itheima
+    # Set the expiration time of the jwt
+    user-ttl: 72000000000
+    # Set the token name used to store the user token
+    user-token-name: authentication
   oss:
     endpoint: ${sky.alioss.endpoint}
     access-key-id: ${sky.alioss.access-key-id}
     access-key-secret: ${sky.alioss.access-key-secret}
     bucket-name: ${sky.alioss.bucket-name}
+  wechat:
+    app-id: ${sky.wechat.app-id}
+    secret: ${sky.wechat.secret}
 
