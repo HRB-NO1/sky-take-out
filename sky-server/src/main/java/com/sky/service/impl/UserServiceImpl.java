@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
      * @return User
      */
     public User wechatLogin(UserLoginDTO userLoginDTO) {
-        getOpenid(userLoginDTO.getCode())
+        String openid = getOpenid(userLoginDTO.getCode());
 
         // Determine if the openid is null
         if (openid == null) {
