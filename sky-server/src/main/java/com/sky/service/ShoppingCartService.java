@@ -18,4 +18,15 @@ public interface ShoppingCartService {
      * @return
      */
     List<ShoppingCart> listShoppingCart();
+
+    /**
+     * Clear the shopping cart
+     */
+    void clearShoppingCart();
+
+    /**
+     * Subtract the shopping cart
+     * @param shoppingCartDTO
+     */
+    void subShoppingCart(ShoppingCartDTO shoppingCartDTO);
 }

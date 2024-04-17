@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.ShoppingCartMapper">
+    <delete id="delete">
+        DELETE FROM shopping_cart
+        WHERE user_id = #{userId}
+        <if test="dishId != null">
+            AND dish_id = #{dishId}
+        </if>
+        <if test="setmealId != null">
+            AND setmeal_id = #{setmealId}
+        </if>
+        <if test="dishFlavor != null">
+            AND dish_flavor = #{dishFlavor}
+        </if>
+    </delete>
 
     <select id="list" resultType="com.sky.entity.ShoppingCart">
         SELECT * FROM shopping_cart

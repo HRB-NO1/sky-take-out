@@ -89,4 +89,43 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return list;
     }
 
+    /**
+     * Clear the shopping cart
+     */
+    public void clearShoppingCart() {
+        Long userId = BaseContext.getCurrentId();
+        ShoppingCart shoppingCart = ShoppingCart.builder()
+                .userId(userId)
+                .build();
+        shoppingCartMapper.delete(shoppingCart);
+    }
+
+    /**
+     * Subtract the shopping cart
+     * @param shoppingCartDTO
+     */
+    public void subShoppingCart(ShoppingCartDTO shoppingCartDTO) {
+        // determine if the dish is in the shopping cart
+        ShoppingCart shoppingCart = new ShoppingCart();
+        // copy the properties from shoppingCartDTO to shoppingCart
+        BeanUtils.copyProperties(shoppingCartDTO, shoppingCart);
+
+        Long userId = BaseContext.getCurrentId();
+        shoppingCart.setUserId(userId);
+
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+
+        // if the dish is in the shopping cart, update the quantity of the dish in the shopping cart
+        if (list != null && list.size() > 0) {
+            ShoppingCart cart = list.get(0);
+            cart.setNumber(cart.getNumber() - 1);
+            if (cart.getNumber() == 0) {
+                shoppingCartMapper.delete(cart);
+                return;
+            }
+            shoppingCartMapper.updateNumberById(cart);
+        } else {
+            log.error("The dish is not in the shopping cart");
+        }
+    }
 }
