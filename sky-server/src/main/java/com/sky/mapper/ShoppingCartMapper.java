@@ -2,6 +2,7 @@ package com.sky.mapper;
 
 import com.sky.dto.ShoppingCartDTO;
 import com.sky.entity.ShoppingCart;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
@@ -10,7 +11,6 @@ import java.util.List;
 
 @Mapper
 public interface ShoppingCartMapper {
-
 
     /**
      * dynamic query
@@ -39,4 +39,11 @@ public interface ShoppingCartMapper {
      * @param shoppingCart
      */
     void delete(ShoppingCart shoppingCart);
+
+    /**
+     * batch insert shopping cart
+     * @param currentId
+     */
+    @Delete("delete from shopping_cart where user_id = #{currentId}")
+    void deleteByUserId(Long currentId);
 }
