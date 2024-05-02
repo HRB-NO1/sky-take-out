@@ -22,4 +22,13 @@ public interface UserMapper {
      * @param user User
      */
     void insert(User user);
+
+    /**
+     * Get User by Id
+     *
+     * @param userId User Id
+     * @return User
+     */
+    @Select("select * from user where id = #{userId}")
+    User getById(Long userId);
 }
