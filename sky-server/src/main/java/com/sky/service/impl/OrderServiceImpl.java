@@ -175,5 +175,24 @@ public class OrderServiceImpl implements OrderService {
         webSocketServer.sendToAllClient(json);
     }
 
+    public void reminder(Long id) {
+        Orders ordersDB = orderMapper.getByNumber(String.valueOf(id));
+
+        // Check if the order exists
+        if (ordersDB == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+
+        // Send message to the client. type orderId content
+        Map map = new HashMap();
+        map.put("type", 2); // 1: new order reminder 2: customer order reminder
+        map.put("orderId", ordersDB.getId());
+        // customer order:  Customer sent a reminder, please check it in time
+        map.put("content", "Order number: " + id);
+
+        String json = JSON.toJSONString(map);
+        webSocketServer.sendToAllClient(json);
+    }
+
 
 }

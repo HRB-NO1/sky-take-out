@@ -50,4 +50,17 @@ public class OrderController {
         return Result.success(orderPaymentVO);
     }
 
+    /**
+     * Order Reminder
+     *
+     * @param Id
+     * @return
+     */
+    @GetMapping("/reminder/{id}")
+    @ApiOperation("Order Reminder")
+    public Result orderReminder(@PathVariable("id") Long id) {
+        orderService.reminder(id);
+        return Result.success();
+    }
+
 }

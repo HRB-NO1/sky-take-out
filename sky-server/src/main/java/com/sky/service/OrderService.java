@@ -29,4 +29,9 @@ public interface OrderService {
      */
     void paySuccess(String outTradeNo);
 
+    /**
+     * Order Reminder
+     * @param id
+     */
+    void reminder(Long id);
 }
